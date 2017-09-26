@@ -8,10 +8,11 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class FitnessService {
   private baseUrl = 'localhost:3000';
-  private exerciseUrl= '/exercises';
-  private programsUrl= '/programs';
+  private exerciseUrl= '/exercises/';
+  private programsUrl= '/programs/';
+  private headers = new Headers({'Content-Type': 'application/json'}); 
   
-  getExercise(id: number): Promise<Exercise> {
+  getExercise(id: string): Promise<Exercise> {
     const url = `${this.baseUrl + this.exerciseUrl}/${id}`;
     return this.http.get(url)
       .toPromise()
@@ -19,7 +20,7 @@ export class FitnessService {
       .catch(this.handleError);
   }
 
-  deleteProgram(id: number): Promise<void> {
+  deleteProgram(id: string): Promise<void> {
     const url = `${this.baseUrl + this.programsUrl}/${id}`;
     return this.http.delete(url, {headers: this.headers})
       .toPromise()
@@ -27,7 +28,7 @@ export class FitnessService {
       .catch(this.handleError);
   }
 
-  deleteExercise(id: number): Promise<void> {
+  deleteExercise(id: string): Promise<void> {
     const url = `${this.baseUrl + this.exerciseUrl}/${id}`;
     return this.http.delete(url, {headers: this.headers})
       .toPromise()
@@ -55,6 +56,38 @@ export class FitnessService {
                .toPromise()
                .then(response => response.json().data as Exercise[])
                .catch(this.handleError);
+  }
+
+  createExercise(exercise: Exercise): Promise<Exercise> {
+    return this.http
+      .post(this.baseUrl + this.exerciseUrl, JSON.stringify({exercise: exercise}), {headers: this.headers})
+      .toPromise()
+      .then(res => res.json().data as Exercise)
+      .catch(this.handleError);
+  }
+
+  createProgram(program: Program): Promise<Program> {
+    return this.http
+      .post(this.baseUrl + this.programsUrl, JSON.stringify({program: program}), {headers: this.headers})
+      .toPromise()
+      .then(res => res.json().data as Program)
+      .catch(this.handleError);
+  }
+
+  updateProgram(program: Program): Promise<Program> {
+    return this.http
+      .post(this.baseUrl + this.programsUrl  + program.id.toString(), JSON.stringify({program: program}), {headers: this.headers})
+      .toPromise()
+      .then(res => res.json().data as Program)
+      .catch(this.handleError);
+  }
+
+  updateExercise(exercise: Exercise): Promise<Exercise> {
+    return this.http
+      .post(this.baseUrl + this.exerciseUrl  + exercise.id.toString(), JSON.stringify({exercise: exercise}), {headers: this.headers})
+      .toPromise()
+      .then(res => res.json().data as Exercise)
+      .catch(this.handleError);
   }
 
   private handleError(error: any): Promise<any> {

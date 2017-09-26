@@ -8,6 +8,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MainContentComponent } from './main-content/main-content.component';
 import { ProgramComponent } from './program/program.component';
 import { ExerciseComponent } from './exercise/exercise.component';
+import {FitnessService} from './fitness.service'
 
 
 
@@ -41,7 +42,7 @@ const appRoutes: Routes = [
     ProgramComponent,
     ExerciseComponent
   ],
-  providers: [],
+  providers: [FitnessService],
   bootstrap: [AppComponent]
   
 })
