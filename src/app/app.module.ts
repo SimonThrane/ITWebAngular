@@ -8,6 +8,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MainContentComponent } from './main-content/main-content.component';
 import { ProgramComponent } from './program/program.component';
 import { ExerciseComponent } from './exercise/exercise.component';
+import { TopBarComponent } from './top-bar/top-bar.component';
 
 
 
@@ -39,7 +40,8 @@ const appRoutes: Routes = [
     NavbarComponent,
     MainContentComponent,
     ProgramComponent,
-    ExerciseComponent
+    ExerciseComponent,
+    TopBarComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
