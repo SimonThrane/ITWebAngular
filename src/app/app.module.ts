@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule }    from '@angular/http';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -8,16 +8,18 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MainContentComponent } from './main-content/main-content.component';
 import { ProgramComponent } from './program/program.component';
 import { ExerciseComponent } from './exercise/exercise.component';
-import {FitnessService} from './fitness.service'
+import { FitnessService } from './fitness.service'
+import { TopBarComponent } from './top-bar/top-bar.component';
 
 
 
 const appRoutes: Routes = [
   { path: 'programs', component: ProgramComponent },
-  { path: 'programs/:id',      component: ProgramComponent },
-  { path: 'exercises',      component: ExerciseComponent },
-  { path: 'exercises/:id',      component: ExerciseComponent },
-  { path: '',
+  { path: 'programs/:id', component: ProgramComponent },
+  { path: 'exercises', component: ExerciseComponent },
+  { path: 'exercises/:id', component: ExerciseComponent },
+  {
+    path: '',
     redirectTo: '/programs',
     pathMatch: 'full'
   },
@@ -26,8 +28,8 @@ const appRoutes: Routes = [
 
 @NgModule({
   imports: [
-    BrowserModule, 
-    HttpModule,   
+    BrowserModule,
+    HttpModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
@@ -40,11 +42,12 @@ const appRoutes: Routes = [
     NavbarComponent,
     MainContentComponent,
     ProgramComponent,
-    ExerciseComponent
+    ExerciseComponent,
+    TopBarComponent
   ],
   providers: [FitnessService],
   bootstrap: [AppComponent]
-  
+
 })
 
 export class AppModule { }
