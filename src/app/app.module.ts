@@ -10,20 +10,22 @@ import { ProgramComponent } from './program/program.component';
 import { ExerciseComponent } from './exercise/exercise.component';
 import { FitnessService } from './fitness.service'
 import { TopBarComponent } from './top-bar/top-bar.component';
+import { HomeComponent } from './home/home.component';
 
 
 
 const appRoutes: Routes = [
+  { path: 'home', component: HomeComponent },
   { path: 'programs', component: ProgramComponent },
   { path: 'programs/:id', component: ProgramComponent },
   { path: 'exercises', component: ExerciseComponent },
   { path: 'exercises/:id', component: ExerciseComponent },
   {
     path: '',
-    redirectTo: '/programs',
+    redirectTo: '/home',
     pathMatch: 'full'
   },
-  // { path: '**', component: PageNotFoundComponent }
+  { path: '**', component: HomeComponent }
 ];
 
 @NgModule({
@@ -43,7 +45,8 @@ const appRoutes: Routes = [
     MainContentComponent,
     ProgramComponent,
     ExerciseComponent,
-    TopBarComponent
+    TopBarComponent,
+    HomeComponent
   ],
   providers: [FitnessService],
   bootstrap: [AppComponent]
