@@ -72,7 +72,7 @@ export class FitnessService {
 
   updateProgram(program: Program): Observable<Program> {
     return this.http
-      .post<Program>(this.baseUrl + this.programsUrl + "/" + program._id.toString(), JSON.stringify(program), { headers: this.headers })
+      .put<Program>(this.baseUrl + this.programsUrl + "/" + program._id.toString(), JSON.stringify(program), { headers: this.headers })
       .first()
       .catch(this.handleError);
   }

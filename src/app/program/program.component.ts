@@ -30,7 +30,7 @@ export class ProgramComponent implements OnInit {
         for (let program of this.programs) {
           for (let i = 0; i < program.exercises.length; i++) {
             if (program.exercises[i]) {
-              this.fitnessService.getExercise(program.exercises[i] as any).subscribe(exercise => program.exercises[i] = exercise);
+              this.fitnessService.getExercise(program.exercises[i] as string).subscribe(exercise => program.exercises[i] = exercise);
             }
           }
         }
@@ -52,7 +52,6 @@ export class ProgramComponent implements OnInit {
 
   createProgram(program: Program): void{
     this.selectedProgram.exercises = this.selectedProgram.exercises.map((e) => e._id);
-    console.log(this.selectedProgram);
     if(program._id){
       this.fitnessService.updateProgram(this.selectedProgram).subscribe(()=>{
         this.selectedProgram = null;                        
