@@ -32,6 +32,10 @@ export class ExerciseComponent implements OnInit {
       .then(exercises => this.exercises = exercises);
   }
 
+  addExercise():void{
+    this.selectedExercise = new Exercise(null, null, null, null, null, null, null);
+  }
+
 
   delete(exercise: Exercise): void {
     this.fitnessService

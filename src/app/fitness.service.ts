@@ -56,28 +56,29 @@ export class FitnessService {
 
   createExercise(exercise: Exercise): Promise<Exercise> {
     return this.http
-      .post<Exercise>(this.baseUrl + this.exerciseUrl, JSON.stringify({ exercise: exercise }), { headers: this.headers })
+      .post<Exercise>(this.baseUrl + this.exerciseUrl, JSON.stringify(exercise), { headers: this.headers })
       .toPromise()
       .catch(this.handleError);
   }
 
   createProgram(program: Program): Promise<Program> {
+    console.log(JSON.stringify(program));
     return this.http
-      .post<Program>(this.baseUrl + this.programsUrl, JSON.stringify({ program: program }), { headers: this.headers })
+      .post<Program>(this.baseUrl + this.programsUrl, JSON.stringify(program), { headers: this.headers })
       .toPromise()
       .catch(this.handleError);
   }
 
   updateProgram(program: Program): Promise<Program> {
     return this.http
-      .post<Program>(this.baseUrl + this.programsUrl + program._id.toString(), JSON.stringify({ program: program }), { headers: this.headers })
+      .post<Program>(this.baseUrl + this.programsUrl + program._id.toString(), JSON.stringify(program), { headers: this.headers })
       .toPromise()
       .catch(this.handleError);
   }
 
   updateExercise(exercise: Exercise): Promise<Exercise> {
     return this.http
-      .post<Exercise>(this.baseUrl + this.exerciseUrl + exercise._id.toString(), JSON.stringify({ exercise: exercise }), { headers: this.headers })
+      .post<Exercise>(this.baseUrl + this.exerciseUrl + exercise._id.toString(), JSON.stringify(exercise), { headers: this.headers })
       .toPromise()
       .catch(this.handleError);
   }
