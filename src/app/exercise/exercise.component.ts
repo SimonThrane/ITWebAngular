@@ -22,7 +22,7 @@ export class ExerciseComponent implements OnInit {
   }
 
   gotoDetail(exercise: Exercise): void {
-    let link = ['/detail', exercise.id];
+    let link = ['/exercises', exercise.id];
     this.router.navigate(link);
   }
 

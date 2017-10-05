@@ -1,11 +1,12 @@
-<p>
-  exercise works!
-</p>
-
-<div>
-  <li *ngFor="let exercise of exercises">
-      <div>{{exercise.name}}</div>
-      <div>{{exercise.description}}</div>
-      <div>{{exercise.reps}}</div>     
-  </li>
+<div class="table container">
+  <div class="row panel-heading" style="background-color:blanchedalmond; color: blue">
+      <div class="col-md-4">Exercise name:</div>
+      <div class="col-md-4">Description:</div>
+      <div class="col-md-4">Repetitions:</div> 
+  </div>
+  <div class="row" (click)="gotoDetail(exercise)" *ngFor="let exercise of exercises">
+      <div class="col-md-4">{{exercise.name}}</div>
+      <div class="col-md-4">{{exercise.description}}</div>
+      <div class="col-md-4">{{exercise.reps}}</div>     
+  </div>
 </div>

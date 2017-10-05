@@ -7,9 +7,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class FitnessService {
-  private baseUrl = '/api';
-  private exerciseUrl = '/exercises/';
-  private programsUrl = '/programs/';
+  private baseUrl = 'http://fitness-boys-api.herokuapp.com/';
+  private exerciseUrl = 'exercises/';
+  private programsUrl = 'programs/';
   private headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   getExercise(id: string): Promise<Exercise> {
@@ -87,9 +87,9 @@ export class FitnessService {
     return Promise.reject(error.message || error);
   }
   constructor(private http: HttpClient) {
-    if (environment.production) {
-      this.baseUrl = 'http://fitness-boys-api.herokuapp.com/';
-    }
+    // if (environment.production) {
+    //   this.baseUrl = 'http://fitness-boys-api.herokuapp.com/';
+    // }
   }
 
 }
