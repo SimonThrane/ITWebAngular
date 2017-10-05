@@ -54,8 +54,9 @@ export class ProgramComponent implements OnInit {
     this.selectedProgram.exercises = this.selectedProgram.exercises.map((e) => e._id);
     console.log(this.selectedProgram);
     if(program._id){
-      this.fitnessService.updateProgram(this.selectedProgram);
-      this.selectedProgram = null;
+      this.fitnessService.updateProgram(this.selectedProgram).subscribe(()=>{
+        this.selectedProgram = null;                        
+      });
     }else{
       this.fitnessService.createProgram(this.selectedProgram).subscribe(() => {
         this.getPrograms();
