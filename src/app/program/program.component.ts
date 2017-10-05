@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FitnessService } from './../fitness.service';
-import {Program} from '../../domain/program';
+import { Program } from '../../domain/program';
 import { Observable } from 'rxjs/Observable';
-import { Router }            from '@angular/router';
+import { Router } from '@angular/router';
 import { Exercise } from '../../domain/exercise';
 
 @Component({
@@ -18,62 +18,63 @@ export class ProgramComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.getPrograms();   
-    this.getExercises(); 
+    this.getPrograms();
+    this.getExercises();
   }
 
   getPrograms(): void {
     this.fitnessService
-        .getPrograms()
-        .then(programs => this.programs = programs);
+      .getPrograms()
+      .then(programs => {
+        this.programs = programs;
+        for (let program of this.programs) {
+          for (let i = 0; i < program.exercises.length; i++) {
+            if (program.exercises[i]) {
+              this.fitnessService.getExercise(program.exercises[i] as any).then(exercise => program.exercises[i] = exercise);
+            }
+          }
+        }
+      });
   }
 
-  addExercise(exercise: Exercise): void{
-    console.log(exercise);
+  addExercise(exercise: Exercise): void {
     this.selectedProgram.exercises.push(exercise);
     this.fitnessService.updateProgram(this.selectedProgram);
   }
 
-  deleteExerciseFromProgram(exercise: Exercise): void{
-    console.log(exercise);
+  deleteExerciseFromProgram(exercise: Exercise): void {
     let index = this.selectedProgram.exercises.indexOf(exercise);
-    if(index > -1){
+    if (index > -1) {
       this.selectedProgram.exercises.splice(index, 1);
     }
     this.fitnessService.updateProgram(this.selectedProgram);
   }
 
-  createProgram(program: Program): void{
-      this.fitnessService.createProgram(program).then(program => this.programs.push(program));
+  createProgram(program: Program): void {
+    this.fitnessService.createProgram(program).then(program => this.programs.push(program));
   }
 
-  addProgram(): void{
+  addProgram(): void {
     this.selectedProgram = new Program(null, null, null, null, null);
   }
 
   getExercises(): void {
     this.fitnessService
-        .getExercises()
-        .then(exercises => this.exercises = exercises);
+      .getExercises()
+      .then(exercises => this.exercises = exercises);
   }
 
   onSelect(program: Program): void {
-    console.log(program);    
     this.selectedProgram = program;
-    for(let i =0; i < program.exercises.length; i++){
-      if(program.exercises[i]){
-        this.fitnessService.getExercise(program.exercises[i] as any).then(exercise => program.exercises[i] = exercise);        
-      }
-    }
   }
 
 
   delete(program: Program): void {
     this.fitnessService
-        .deleteExercise(program._id)
-        .then(() => {
-          this.programs = this.programs.filter(h => h !== program);
-        });
+      .deleteExercise(program._id)
+      .then(() => {
+        this.programs = this.programs.filter(h => h !== program);
+      });
   }
 
 }

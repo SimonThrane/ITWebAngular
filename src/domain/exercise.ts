@@ -1,6 +1,6 @@
 export class Exercise {
     constructor(
-        public id: string,
+        public _id: string,
         public name: string,
         public description: string,
         public repetitions: number,
