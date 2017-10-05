@@ -39,9 +39,6 @@ export class ProgramComponent implements OnInit {
 
   addExercise(exercise: Exercise): void {
     this.selectedProgram.exercises.push(exercise);
-    // this.fitnessService.updateProgram(this.selectedProgram).then(
-    //   program => this.selectedProgram = program
-    // );
   }
 
   deleteExerciseFromProgram(exercise: Exercise): void {
@@ -57,13 +54,17 @@ export class ProgramComponent implements OnInit {
     this.selectedProgram.exercises = this.selectedProgram.exercises.map((e) => e._id);
     console.log(this.selectedProgram);
     if(program._id){
-      console.log("Update");
-      this.fitnessService.updateProgram(this.selectedProgram).subscribe(program => this.selectedProgram = program);
+      this.fitnessService.updateProgram(this.selectedProgram);
+      this.selectedProgram = null;
     }else{
-      console.log("CreateNew");
-      this.fitnessService.createProgram(this.selectedProgram).subscribe(program => {this.programs.push(program); console.log(program)});
+      this.fitnessService.createProgram(this.selectedProgram).subscribe(() => {
+        this.getPrograms();
+        this.getExercises();
+        this.selectedProgram = null;                
+      });
+    };
     }
-  }
+  
 
   addProgram(): void{
     this.selectedProgram = new Program(null, new Array<any>(), null, null, null);
@@ -83,7 +84,7 @@ export class ProgramComponent implements OnInit {
   delete(program: Program): void {
     if(confirm("Are you sure you would delete the program?")){
       this.fitnessService
-        .deleteExercise(program._id)
+        .deleteProgram(program._id)
         .subscribe(() => {
           this.programs = this.programs.filter(h => h !== program);
         });

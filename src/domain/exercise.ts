@@ -3,7 +3,7 @@ export class Exercise {
         public _id: string,
         public name: string,
         public description: string,
-        public repetitions: number,
+        public reps: number,
         public sets: number,
         public isRepetition: boolean,
         public time?: number

@@ -79,7 +79,7 @@ export class FitnessService {
 
   updateExercise(exercise: Exercise): Observable<Exercise> {
     return this.http
-      .post<Exercise>(this.baseUrl + this.exerciseUrl + "/" + exercise._id.toString(), JSON.stringify(exercise), { headers: this.headers })
+      .put<Exercise>(this.baseUrl + this.exerciseUrl + "/" + exercise._id.toString(), JSON.stringify(exercise), { headers: this.headers })
       .first()
       .catch(this.handleError);
   }

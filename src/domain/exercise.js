@@ -5,7 +5,7 @@ class Exercise {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.repetitions = repetitions;
+        this.reps = repetitions;
         this.sets = sets;
         this.isRepetition = isRepetition;
         this.time = time;

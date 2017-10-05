@@ -6,16 +6,28 @@
     </div>
     <div class="row">
         <label>Description:</label>
-        <input [(ngModel)]="exercise.description" placeholder="name"/>
+        <input [(ngModel)]="exercise.description" placeholder="description"/>
     </div>
-    <div class="row">
-        <label>Repetitions:</label>
-        <input [(ngModel)]="exercise.reps" placeholder="name"/>
-    </div>
-    <div class="row">
-        <label>Sets:</label>
-        <input [(ngModel)]="exercise.sets" placeholder="name"/>
-    </div>
+    <div *ngIf="exercise.isRepetition">
+      <div class="row">
+          <label>Repetitions:</label>
+          <input [(ngModel)]="exercise.reps" placeholder="reps"/>
+      </div>
+      <div class="row">
+          <label>Sets:</label>
+          <input [(ngModel)]="exercise.sets" placeholder="sets"/>
+      </div>
+  </div>
+  <div *ngIf="!exercise.isRepetition">
+      <div class="row">
+          <label>Time:</label>
+          <input [(ngModel)]="exercise.time" placeholder="time"/>
+      </div>
+  </div>
+  <div class="row">
+      <label>Is Repetitions:</label>
+      <input type="checkbox" [(ngModel)]="exercise.isRepetition">
+  </div>
     <button class="btn btn-secondary" (click)="saveExercise()">Save exercise</button>
     
   </div>
