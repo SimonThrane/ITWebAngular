@@ -28,7 +28,6 @@ export class ShowProgramComponent implements OnInit {
     // this.program.exercises.push(exercise);
   }
   saveProgram(program: Program){
-    this.program.create_date = new Date();
     this.onCreateProgram.emit(this.program);
   }
   

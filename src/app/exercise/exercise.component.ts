@@ -36,6 +36,15 @@ export class ExerciseComponent implements OnInit {
     this.selectedExercise = new Exercise(null, null, null, null, null, null, null);
   }
 
+  createExercise():void{
+    if(this.selectedExercise._id){
+      this.fitnessService.updateExercise(this.selectedExercise)
+      .then(exercise => this.selectedExercise = exercise);
+    }else{
+      this.fitnessService.createExercise(this.selectedExercise)
+      .then(exercise => this.exercises.push(exercise));
+    }
+  }
 
   delete(exercise: Exercise): void {
     this.fitnessService

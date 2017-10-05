@@ -8,7 +8,7 @@
         <div class="col-md-3" (click)="onSelect(program)">{{program.name}}</div>
         <div class="col-md-3">{{program.category}}</div>
         <div class="col-md-3">
-          {{program.exercises.length}}
+          {{program.exercises.length}} <span ><i (click)="delete(program)" title="Delete program" class="fa fa-trash-o" aria-hidden="true"></i></span>
         </div>     
     </div>
   </div>

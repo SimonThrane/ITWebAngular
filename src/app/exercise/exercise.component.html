@@ -7,8 +7,9 @@
   <div class="row" (click)="onSelect(exercise)" *ngFor="let exercise of exercises">
       <div class="col-md-4">{{exercise.name}}</div>
       <div class="col-md-4">{{exercise.description}}</div>
-      <div class="col-md-4">{{exercise.reps}}</div>     
+      <div class="col-md-4">{{exercise.reps}} <span ><i (click)="delete(exercise)" class="fa fa-trash-o" aria-hidden="true"></i></span></div>     
   </div>
 </div>
+<button type="button" class="btn btn-success" (click)="addExercise()">Make a new exercise</button>
 
-<app-show-exercise [exercise]="selectedExercise"></app-show-exercise>
+<app-show-exercise (onAddExercise)="createExercise()" [exercise]="selectedExercise"></app-show-exercise>

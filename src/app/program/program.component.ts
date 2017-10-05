@@ -81,12 +81,13 @@ export class ProgramComponent implements OnInit {
 
 
   delete(program: Program): void {
-    this.fitnessService
-      .deleteExercise(program._id)
-      .then(() => {
-        this.programs = this.programs.filter(h => h !== program);
-      });
+    if(confirm("Are you sure you would delete the program?")){
+      this.fitnessService
+        .deleteExercise(program._id)
+        .then(() => {
+          this.programs = this.programs.filter(h => h !== program);
+        });
+    }
   }
-
 }
 
