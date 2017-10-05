@@ -31,7 +31,9 @@ export class ProgramComponent implements OnInit {
   addExercise(exercise: Exercise): void{
     console.log(exercise);
     this.selectedProgram.exercises.push(exercise);
-    this.fitnessService.updateProgram(this.selectedProgram);
+    // this.fitnessService.updateProgram(this.selectedProgram).then(
+    //   program => this.selectedProgram = program
+    // );
   }
 
   deleteExerciseFromProgram(exercise: Exercise): void{
@@ -40,15 +42,24 @@ export class ProgramComponent implements OnInit {
     if(index > -1){
       this.selectedProgram.exercises.splice(index, 1);
     }
-    this.fitnessService.updateProgram(this.selectedProgram);
+    this.fitnessService.updateProgram(this.selectedProgram).then(program =>
+      this.selectedProgram = program);
   }
 
   createProgram(program: Program): void{
-      this.fitnessService.createProgram(program).then(program => this.programs.push(program));
+    this.selectedProgram.exercises = this.selectedProgram.exercises.map((e) => e._id); 
+    console.log(this.selectedProgram);
+    if(program._id){
+      console.log("Update");
+      this.fitnessService.updateProgram(this.selectedProgram).then(program => this.selectedProgram = program);      
+    }else{
+      console.log("CreateNew");      
+      this.fitnessService.createProgram(this.selectedProgram).then(program => {this.programs.push(program); console.log(program)});            
+    }
   }
 
   addProgram(): void{
-    this.selectedProgram = new Program(null, null, null, null, null);
+    this.selectedProgram = new Program(null, new Array<any>(), null, null, null);
   }
 
   getExercises(): void {

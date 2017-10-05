@@ -1,5 +1,5 @@
 <div *ngIf="program">
-  <h2>{{program.name}} details!</h2>
+  <h2>{{program.name}}</h2>
   <div class="dropdown">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Exercises
@@ -9,13 +9,15 @@
         </div>
   </div>
   <div>
-      <label>name: </label>
+      <label>Name: </label>
       <input [(ngModel)]="program.name" placeholder="name"/>
+      <label>Category: </label>
+      <input [(ngModel)]="program.category" placeholder="category"/>
       <li *ngFor="let exercise of program.exercises">
           {{exercise.name}} - {{exercise.reps}} * {{exercise.sets}} <i (click)="deleteExercise(exercise)" class="fa fa-trash-o" aria-hidden="true"></i>
       </li>
 
-      <button *ngIf="program._id === null" class="btn btn-secondary" (click)="createProgram(program)">Create Program</button>
+      <button class="btn btn-secondary" (click)="saveProgram(program)">Save Program</button>
   </div>
 
 </div>

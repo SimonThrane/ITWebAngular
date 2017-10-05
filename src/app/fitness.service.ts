@@ -70,14 +70,14 @@ export class FitnessService {
 
   updateProgram(program: Program): Promise<Program> {
     return this.http
-      .post<Program>(this.baseUrl + this.programsUrl + program.id.toString(), JSON.stringify({ program: program }), { headers: this.headers })
+      .post<Program>(this.baseUrl + this.programsUrl + program._id.toString(), JSON.stringify({ program: program }), { headers: this.headers })
       .toPromise()
       .catch(this.handleError);
   }
 
   updateExercise(exercise: Exercise): Promise<Exercise> {
     return this.http
-      .post<Exercise>(this.baseUrl + this.exerciseUrl + exercise.id.toString(), JSON.stringify({ exercise: exercise }), { headers: this.headers })
+      .post<Exercise>(this.baseUrl + this.exerciseUrl + exercise._id.toString(), JSON.stringify({ exercise: exercise }), { headers: this.headers })
       .toPromise()
       .catch(this.handleError);
   }

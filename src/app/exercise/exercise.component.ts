@@ -35,7 +35,7 @@ export class ExerciseComponent implements OnInit {
 
   delete(exercise: Exercise): void {
     this.fitnessService
-      .deleteExercise(exercise.id)
+      .deleteExercise(exercise._id)
       .then(() => {
         this.exercises = this.exercises.filter(h => h !== exercise);
       });

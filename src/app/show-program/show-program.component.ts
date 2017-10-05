@@ -16,19 +16,20 @@ export class ShowProgramComponent implements OnInit {
     
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() {  }
 
-  }
   deleteExercise(exercise: Exercise): void{
     this.onDeleteExercise.emit(exercise);
   }
   addExercise(exercise: Exercise):void
   {
-    this.program.exercises.push(exercise);
     this.onAddExercise.emit(exercise);
+    // console.log(exercise);
+    // this.program.exercises.push(exercise);
   }
-  createProgram(program: Program){
-    this.onCreateProgram.emit(program);
+  saveProgram(program: Program){
+    this.program.create_date = new Date();
+    this.onCreateProgram.emit(this.program);
   }
   
 
