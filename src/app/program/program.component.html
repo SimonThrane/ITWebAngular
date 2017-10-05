@@ -13,4 +13,6 @@
     </div>
   </div>
 
-  <app-show-program (onAddExercise)="addExercise($event)" [program]="selectedProgram" [exercises]="exercises" class="container col-md-6"></app-show-program>
+  <button type="button" class="btn btn-success" (click)="addProgram()">Make a new program</button>
+  
+  <app-show-program (onCreateProgram)="createProgram($event)" (onDeleteExercise)="deleteExerciseFromProgram($event)" (onAddExercise)="addExercise($event)" [program]="selectedProgram" [exercises]="exercises" class="container col-md-6"></app-show-program>

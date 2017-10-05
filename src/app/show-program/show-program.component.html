@@ -12,8 +12,10 @@
       <label>name: </label>
       <input [(ngModel)]="program.name" placeholder="name"/>
       <li *ngFor="let exercise of program.exercises">
-          {{exercise.name}} - {{exercise.reps}} * {{exercise.sets}}
+          {{exercise.name}} - {{exercise.reps}} * {{exercise.sets}} <i (click)="deleteExercise(exercise)" class="fa fa-trash-o" aria-hidden="true"></i>
       </li>
+
+      <button *ngIf="program._id === null" class="btn btn-secondary" (click)="createProgram(program)">Create Program</button>
   </div>
 
 </div>
