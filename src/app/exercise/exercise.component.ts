@@ -39,10 +39,10 @@ export class ExerciseComponent implements OnInit {
   createExercise():void{
     if(this.selectedExercise._id){
       this.fitnessService.updateExercise(this.selectedExercise)
-      .then(exercise => this.selectedExercise = exercise);
+      .subscribe(exercise => this.selectedExercise = exercise);
     }else{
       this.fitnessService.createExercise(this.selectedExercise)
-      .then(exercise => this.exercises.push(exercise));
+      .subscribe(exercise => this.exercises.push(exercise));
     }
   }
 

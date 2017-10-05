@@ -81,21 +81,13 @@ export class ProgramComponent implements OnInit {
 
 
   delete(program: Program): void {
-<<<<<<< HEAD
     if(confirm("Are you sure you would delete the program?")){
       this.fitnessService
         .deleteExercise(program._id)
-        .then(() => {
+        .subscribe(() => {
           this.programs = this.programs.filter(h => h !== program);
         });
     }
-=======
-    this.fitnessService
-      .deleteExercise(program._id)
-      .subscribe(() => {
-        this.programs = this.programs.filter(h => h !== program);
-      });
->>>>>>> feature/httpclient-as-observables
   }
 }
 
