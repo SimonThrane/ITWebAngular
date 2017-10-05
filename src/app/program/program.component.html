@@ -4,11 +4,13 @@
         <div class="col-md-4">Category:</div>
         <div class="col-md-4">Exercises:</div> 
     </div>
-    <div class="row" (click)="gotoDetail(program)" *ngFor="let program of programs">
-        <div class="col-md-4">{{program.name}}</div>
+    <div class="row" *ngFor="let program of programs">
+        <div class="col-md-4" (click)="onSelect(program)">{{program.name}}</div>
         <div class="col-md-4">{{program.category}}</div>
         <div class="col-md-4">
           {{program.exercises.length}}
         </div>     
     </div>
   </div>
+
+  <app-show-program [program]="selectedProgram"></app-show-program>

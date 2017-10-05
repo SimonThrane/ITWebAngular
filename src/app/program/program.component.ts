@@ -11,6 +11,7 @@ import { Router }            from '@angular/router';
 })
 export class ProgramComponent implements OnInit {
   programs: Program[];
+  selectedProgram: Program;
   constructor(private fitnessService: FitnessService,
     private router: Router) { }
 
@@ -22,6 +23,10 @@ export class ProgramComponent implements OnInit {
     this.fitnessService
         .getPrograms()
         .then(programs => this.programs = programs);
+  }
+
+  onSelect(program: Program): void {
+    this.selectedProgram = program;
   }
 
 
