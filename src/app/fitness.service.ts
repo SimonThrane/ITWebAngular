@@ -8,8 +8,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class FitnessService {
   private baseUrl = 'http://fitness-boys-api.herokuapp.com/';
-  private exerciseUrl = 'exercises/';
-  private programsUrl = 'programs/';
+  private exerciseUrl = 'exercises';
+  private programsUrl = 'programs';
   private headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   getExercise(id: string): Promise<Exercise> {
