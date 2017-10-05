@@ -25,12 +25,12 @@ export class ProgramComponent implements OnInit {
   getPrograms(): void {
     this.fitnessService
       .getPrograms()
-      .then(programs => {
+      .subscribe(programs => {
         this.programs = programs;
         for (let program of this.programs) {
           for (let i = 0; i < program.exercises.length; i++) {
             if (program.exercises[i]) {
-              this.fitnessService.getExercise(program.exercises[i] as any).then(exercise => program.exercises[i] = exercise);
+              this.fitnessService.getExercise(program.exercises[i] as any).subscribe(exercise => program.exercises[i] = exercise);
             }
           }
         }
@@ -49,7 +49,7 @@ export class ProgramComponent implements OnInit {
     if (index > -1) {
       this.selectedProgram.exercises.splice(index, 1);
     }
-    this.fitnessService.updateProgram(this.selectedProgram).then(program =>
+    this.fitnessService.updateProgram(this.selectedProgram).subscribe(program =>
       this.selectedProgram = program);
   }
 
@@ -58,10 +58,10 @@ export class ProgramComponent implements OnInit {
     console.log(this.selectedProgram);
     if(program._id){
       console.log("Update");
-      this.fitnessService.updateProgram(this.selectedProgram).then(program => this.selectedProgram = program);
+      this.fitnessService.updateProgram(this.selectedProgram).subscribe(program => this.selectedProgram = program);
     }else{
       console.log("CreateNew");
-      this.fitnessService.createProgram(this.selectedProgram).then(program => {this.programs.push(program); console.log(program)});
+      this.fitnessService.createProgram(this.selectedProgram).subscribe(program => {this.programs.push(program); console.log(program)});
     }
   }
 
@@ -72,7 +72,7 @@ export class ProgramComponent implements OnInit {
   getExercises(): void {
     this.fitnessService
       .getExercises()
-      .then(exercises => this.exercises = exercises);
+      .subscribe(exercises => this.exercises = exercises);
   }
 
   onSelect(program: Program): void {
@@ -81,6 +81,7 @@ export class ProgramComponent implements OnInit {
 
 
   delete(program: Program): void {
+<<<<<<< HEAD
     if(confirm("Are you sure you would delete the program?")){
       this.fitnessService
         .deleteExercise(program._id)
@@ -88,6 +89,13 @@ export class ProgramComponent implements OnInit {
           this.programs = this.programs.filter(h => h !== program);
         });
     }
+=======
+    this.fitnessService
+      .deleteExercise(program._id)
+      .subscribe(() => {
+        this.programs = this.programs.filter(h => h !== program);
+      });
+>>>>>>> feature/httpclient-as-observables
   }
 }
 

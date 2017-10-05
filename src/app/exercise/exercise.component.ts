@@ -29,7 +29,7 @@ export class ExerciseComponent implements OnInit {
   getExercises(): void {
     this.fitnessService
       .getExercises()
-      .then(exercises => this.exercises = exercises);
+      .subscribe(exercises => this.exercises = exercises);
   }
 
   addExercise():void{
@@ -49,7 +49,7 @@ export class ExerciseComponent implements OnInit {
   delete(exercise: Exercise): void {
     this.fitnessService
       .deleteExercise(exercise._id)
-      .then(() => {
+      .subscribe(() => {
         this.exercises = this.exercises.filter(h => h !== exercise);
       });
   }
