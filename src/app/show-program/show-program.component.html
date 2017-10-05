@@ -1,12 +1,19 @@
 <div *ngIf="program">
-<h2>{{program.name}} details!</h2>
-<div><label>id: </label>{{program.id}}</div>
-<div>
-    <label>name: </label>
-    <!-- <input [(ngModel)]="selectedProgram.name" placeholder="name"/> -->
-    <li>
-
-    </li>
-</div>
+  <h2>{{program.name}} details!</h2>
+  <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown button
+        </button>
+        <div *ngFor="let exercise of exercises" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" (click)=addExercise(exercise)>{{exercise.name}}</a>
+        </div>
+  </div>
+  <div>
+      <label>name: </label>
+      <input [(ngModel)]="program.name" placeholder="name"/>
+      <li *ngFor="let exercise of program.exercises">
+          {{exercise.name}} - {{exercise.reps}} * {{exercise.sets}}
+      </li>
+  </div>
 
 </div>

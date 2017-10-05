@@ -4,11 +4,11 @@
       <div class="col-md-4">Description:</div>
       <div class="col-md-4">Repetitions:</div> 
   </div>
-  <div class="row" (click)="gotoDetail(exercise)" *ngFor="let exercise of exercises">
+  <div class="row" (click)="onSelect(exercise)" *ngFor="let exercise of exercises">
       <div class="col-md-4">{{exercise.name}}</div>
       <div class="col-md-4">{{exercise.description}}</div>
       <div class="col-md-4">{{exercise.reps}}</div>     
   </div>
 </div>
 
-<app-show-program></app-show-program>
+<app-show-exercise [exercise]="selectedExercise"></app-show-exercise>

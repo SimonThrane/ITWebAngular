@@ -3,6 +3,7 @@ import { FitnessService } from './../fitness.service';
 import {Program} from '../../domain/program';
 import { Observable } from 'rxjs/Observable';
 import { Router }            from '@angular/router';
+import { Exercise } from '../../domain/exercise';
 
 @Component({
   selector: 'app-program',
@@ -12,11 +13,13 @@ import { Router }            from '@angular/router';
 export class ProgramComponent implements OnInit {
   programs: Program[];
   selectedProgram: Program;
+  exercises: Exercise[];
   constructor(private fitnessService: FitnessService,
     private router: Router) { }
 
   ngOnInit() {
-    this.getPrograms();    
+    this.getPrograms();   
+    this.getExercises(); 
   }
 
   getPrograms(): void {
@@ -25,8 +28,23 @@ export class ProgramComponent implements OnInit {
         .then(programs => this.programs = programs);
   }
 
+  addExercise(exercise: Exercise): void{
+    console.log(exercise);
+  }
+
+  getExercises(): void {
+    this.fitnessService
+        .getExercises()
+        .then(exercises => this.exercises = exercises);
+  }
+
   onSelect(program: Program): void {
     this.selectedProgram = program;
+    for(let i =0; i < program.exercises.length; i++){
+      if(program.exercises[i]){
+        this.fitnessService.getExercise(program.exercises[i] as any).then(exercise => program.exercises[i] = exercise);        
+      }
+    }
   }
 
 

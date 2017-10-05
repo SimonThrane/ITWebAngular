@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
   providers: [FitnessService]
 })
 export class ExerciseComponent implements OnInit {
+  selectedExercise: Exercise;
   exercises: Exercise[];
   constructor(private fitnessService: FitnessService,
     private router: Router
@@ -21,9 +22,8 @@ export class ExerciseComponent implements OnInit {
     this.getExercises();
   }
 
-  gotoDetail(exercise: Exercise): void {
-    let link = ['/exercises', exercise.id];
-    this.router.navigate(link);
+  onSelect(exercise: Exercise): void {
+    this.selectedExercise = exercise;
   }
 
   getExercises(): void {

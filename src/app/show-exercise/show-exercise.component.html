@@ -1,0 +1,14 @@
+<div *ngIf="exercise">
+    <h2>{{exercise.name}} details!</h2>
+    <div><label>Id: </label>{{exercise.id}}</div>
+    <div class="row">
+        <label>Name: </label>
+        <input [(ngModel)]="exercise.name" placeholder="name"/>       
+    </div>
+    <div class="row">
+        <label>Description:</label>
+        <input [(ngModel)]="exercise.description" placeholder="name"/>
+    </div>
+    
+  
+  </div>

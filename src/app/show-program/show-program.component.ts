@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Program } from '../../domain/program';
+import { Exercise } from '../../domain/exercise';
 
 @Component({
   selector: 'app-show-program',
@@ -8,10 +9,17 @@ import { Program } from '../../domain/program';
 })
 export class ShowProgramComponent implements OnInit {
   @Input() program: Program;
+  @Input() exercises: Exercise[];
+  @Output() onAddExercise = new EventEmitter<Exercise>();
   constructor() { }
 
   ngOnInit() {
-    console.log(this.program);
+
+  }
+
+  addExercise(exercise: Exercise):void
+  {
+    this.onAddExercise.emit(exercise);
   }
 
 }

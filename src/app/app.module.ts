@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -12,6 +13,7 @@ import { FitnessService } from './fitness.service'
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { HomeComponent } from './home/home.component';
 import { ShowProgramComponent } from './show-program/show-program.component';
+import { ShowExerciseComponent } from './show-exercise/show-exercise.component';
 
 
 
@@ -33,6 +35,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
@@ -48,7 +51,8 @@ const appRoutes: Routes = [
     ExerciseComponent,
     TopBarComponent,
     HomeComponent,
-    ShowProgramComponent
+    ShowProgramComponent,
+    ShowExerciseComponent
   ],
   providers: [FitnessService],
   bootstrap: [AppComponent]
