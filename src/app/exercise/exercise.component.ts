@@ -38,14 +38,16 @@ export class ExerciseComponent implements OnInit {
 
   createExercise():void{
     if(this.selectedExercise._id){
-      this.fitnessService.updateExercise(this.selectedExercise);
-      this.selectedExercise = null;
+      this.fitnessService.updateExercise(this.selectedExercise).subscribe(() => {
+        this.selectedExercise = null;
+      });
       //.subscribe(exercise => this.selectedExercise = exercise);
     }else{
       console.log(this.selectedExercise);
-      this.fitnessService.createExercise(this.selectedExercise);
-      this.selectedExercise = null;      
-      this.getExercises();
+      this.fitnessService.createExercise(this.selectedExercise).subscribe(() => {
+        this.selectedExercise = null;
+        this.getExercises();
+      });
     }
   }
 
