@@ -10,9 +10,9 @@
   </div>
   <div>
       <label>Name: </label>
-      <input [(ngModel)]="program.name" placeholder="name"/>
+      <input [(ngModel)]="program.name" placeholder="name" [disabled]="program._id"/>
       <label>Category: </label>
-      <input [(ngModel)]="program.category" placeholder="category"/>
+      <input [(ngModel)]="program.category" placeholder="category" [disabled]="program._id"/>
       <li *ngFor="let exercise of program.exercises">
           {{exercise.name}} - {{exercise.reps}} * {{exercise.sets}} <i (click)="deleteExercise(exercise)" class="fa fa-trash-o" aria-hidden="true"></i>
       </li>

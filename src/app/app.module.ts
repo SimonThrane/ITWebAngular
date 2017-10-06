@@ -14,6 +14,8 @@ import { TopBarComponent } from './top-bar/top-bar.component';
 import { HomeComponent } from './home/home.component';
 import { ShowProgramComponent } from './show-program/show-program.component';
 import { ShowExerciseComponent } from './show-exercise/show-exercise.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -52,7 +54,9 @@ const appRoutes: Routes = [
     TopBarComponent,
     HomeComponent,
     ShowProgramComponent,
-    ShowExerciseComponent
+    ShowExerciseComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   providers: [FitnessService],
   bootstrap: [AppComponent]

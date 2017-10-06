@@ -4,11 +4,11 @@
         <div class="col-md-3">Category:</div>
         <div class="col-md-3">Number of exercises:</div> 
     </div>
-    <div class="row" *ngFor="let program of programs">
-        <div class="col-md-3" (click)="onSelect(program)">{{program.name}}</div>
+    <div style="cursor: pointer" class="row" *ngFor="let program of programs">
+        <div style="font-weight: 700" class="col-md-3" (click)="onSelect(program)">{{program.name}}</div>
         <div class="col-md-3">{{program.category}}</div>
         <div class="col-md-3">
-          {{program.exercises.length}} <span ><i (click)="delete(program)" title="Delete program" class="fa fa-trash-o" aria-hidden="true"></i></span>
+          {{program.exercises.length}} <span ><i (click)="delete(program)" title="Delete program" style="cursor: pointer" class="fa fa-trash-o" aria-hidden="true"></i></span>
         </div>     
     </div>
   </div>
