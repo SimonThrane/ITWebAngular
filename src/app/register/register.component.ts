@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../domain/User';
 import { FitnessService } from '../fitness.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +10,7 @@ import { FitnessService } from '../fitness.service';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private fitnessService: FitnessService) { }
+  constructor(private fitnessService: FitnessService, private authService: AuthService) { }
   user: User;
   formError: String;
   ngOnInit() {
@@ -30,13 +31,13 @@ export class RegisterComponent implements OnInit {
 
   doRegister(): void {
     this.formError = "";
-    this.fitnessService
+    this.authService
       .register(this.user)
       // .err(function(err){
       //   this.formError = err;
       // })
       // .then(function(){
-        
+
       // });
   };
 

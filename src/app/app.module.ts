@@ -16,17 +16,17 @@ import { ShowProgramComponent } from './show-program/show-program.component';
 import { ShowExerciseComponent } from './show-exercise/show-exercise.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { IsLoggedInGuard } from './is-logged-in.guard';
+import { AuthService } from './auth.service';
 
 
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'programs', component: ProgramComponent },
-  { path: 'programs/:id', component: ProgramComponent },
-  { path: 'exercises', component: ExerciseComponent },
+  { path: 'programs', component: ProgramComponent, canActivate: [IsLoggedInGuard] },
+  { path: 'exercises', component: ExerciseComponent, canActivate: [IsLoggedInGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'exercises/:id', component: ExerciseComponent },
   {
     path: '',
     redirectTo: '/home',
@@ -60,7 +60,11 @@ const appRoutes: Routes = [
     RegisterComponent,
     LoginComponent
   ],
-  providers: [FitnessService],
+  providers: [
+    FitnessService,
+    IsLoggedInGuard,
+    AuthService
+  ],
   bootstrap: [AppComponent]
 
 })

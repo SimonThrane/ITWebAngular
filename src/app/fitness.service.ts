@@ -8,85 +8,20 @@ import 'rxjs/add/observable/of';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { HttpErrorResponse } from '@angular/common/http';
-import { User } from '../domain/User';
-import { AuthResponse } from '../domain/AuthResponse';
 
 @Injectable()
 export class FitnessService {
-  private baseUrl = 'http://fitness-boys-api.herokuapp.com/';
+  public baseUrl = 'http://fitness-boys-api.herokuapp.com/';
   private exerciseUrl = 'exercises';
   private programsUrl = 'programs';
   private headers = new HttpHeaders().set('Content-Type', 'application/json');
-  private tokenName = 'fitness-boys-token';
 
-  private saveToken(token: string) {
-    window.localStorage[this.tokenName] = token;
-  }
-
-  private getToken(): String {
-      if (window.localStorage[this.tokenName]) {
-          return window.localStorage[this.tokenName];
-      } else {
-          return '';
-      }
-  }
-    
   getExercise(id: string): Observable<Exercise> {
     const url = `${this.baseUrl + this.exerciseUrl}/${id}`;
     return this.http.get<Exercise>(url)
       .first()
       .catch(this.handleError);
   }
-
-  public login(user: User): void {
-    const url = `${this.baseUrl}/login`;    
-    this.http.post<AuthResponse>(url, user).subscribe(data => {
-      this.saveToken(data.token);
-    });
-  };
-
-  public logout(): void {
-    window.localStorage.removeItem(this.tokenName);
-  };
-
-  public register(user: User): boolean {
-      const url = `${this.baseUrl}/register`;
-      this.http.post<AuthResponse>(url, user).subscribe(data => {
-      this.saveToken(data.token);
-      return true;
-    },
-      // Errors will call this callback instead:
-      (err: HttpErrorResponse) => {
-      if (err.error instanceof Error) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.log('An error occurred:', err.error.message);
-      } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong,
-      console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
-      }
-      return false;
-    });
-    return false;
-  }
-
-  public isLoggedIn():boolean {
-      let token = this.getToken();
-      if(token){
-        var payload = JSON.parse(window.atob(token.split('.')[1]));
-        return payload.exp > Date.now() / 1000;
-      } else {
-        return false;
-      }
-  };
-
-  public currentUser(): User {
-      if(this.isLoggedIn()){
-        var token = this.getToken();
-        var payload = JSON.parse(window.atob(token.split('.')[1]));
-        return new User(null, null, payload.name, payload.email, null);       
-      }
-    };
 
   deleteProgram(id: string): Observable<void> {
     const url = `${this.baseUrl + this.programsUrl}/${id}`;

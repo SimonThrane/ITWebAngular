@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../domain/User';
 import { FitnessService } from '../fitness.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,7 @@ import { FitnessService } from '../fitness.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  constructor(private fitnessService: FitnessService) { }
+  constructor(private fitnessService: FitnessService, private authService: AuthService) { }
   user: User;
   formError: String;
   ngOnInit() {
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
 
   login(): void {
       this.formError = "";
-      this.fitnessService.
+      this.authService.
         login(this.user)
         // .error(function(err){
         //   this.formError = err;
@@ -36,6 +37,6 @@ export class LoginComponent implements OnInit {
         // .then(function(){
 
         // });
-    
+
   }
 }
