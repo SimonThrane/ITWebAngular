@@ -9,6 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { HttpErrorResponse } from '@angular/common/http';
 import { User } from '../domain/User';
+import { AuthResponse } from '../domain/AuthResponse';
 
 @Injectable()
 export class FitnessService {
@@ -17,26 +18,38 @@ export class FitnessService {
   private programsUrl = 'programs';
   private headers = new HttpHeaders().set('Content-Type', 'application/json');
   private tokenName = 'fitness-boys-token';
-  
+
   private saveToken(token: string) {
     window.localStorage[this.tokenName] = token;
   }
-    private getToken(token: string) {
-        if (window.localStorage[this.tokenName]) {
-          return window.localStorage[this.tokenName];
-        } else {
-          return '';
-        }
-    }
-    
 
+  private getToken(): String {
+      if (window.localStorage[this.tokenName]) {
+          return window.localStorage[this.tokenName];
+      } else {
+          return '';
+      }
+  }
+    
   getExercise(id: string): Observable<Exercise> {
     const url = `${this.baseUrl + this.exerciseUrl}/${id}`;
     return this.http.get<Exercise>(url)
       .first()
       .catch(this.handleError);
   }
-  public register(user: User) {
+
+  public login(user: User): void {
+    const url = `${this.baseUrl}/login`;    
+    this.http.post<AuthResponse>(url, user).subscribe(data => {
+      this.saveToken(data.token);
+    });
+  };
+
+  public logout(): void {
+    window.localStorage.removeItem(this.tokenName);
+  };
+
+  public register(user: User): boolean {
       const url = `${this.baseUrl}/register`;
       this.http.post<AuthResponse>(url, user).subscribe(data => {
       this.saveToken(data.token);
@@ -54,7 +67,26 @@ export class FitnessService {
       }
       return false;
     });
-    }
+    return false;
+  }
+
+  public isLoggedIn():boolean {
+      let token = this.getToken();
+      if(token){
+        var payload = JSON.parse(window.atob(token.split('.')[1]));
+        return payload.exp > Date.now() / 1000;
+      } else {
+        return false;
+      }
+  };
+
+  public currentUser(): User {
+      if(this.isLoggedIn()){
+        var token = this.getToken();
+        var payload = JSON.parse(window.atob(token.split('.')[1]));
+        return new User(null, null, payload.name, payload.email, null);       
+      }
+    };
 
   deleteProgram(id: string): Observable<void> {
     const url = `${this.baseUrl + this.programsUrl}/${id}`;

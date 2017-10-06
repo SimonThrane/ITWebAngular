@@ -24,6 +24,8 @@ const appRoutes: Routes = [
   { path: 'programs', component: ProgramComponent },
   { path: 'programs/:id', component: ProgramComponent },
   { path: 'exercises', component: ExerciseComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'exercises/:id', component: ExerciseComponent },
   {
     path: '',
