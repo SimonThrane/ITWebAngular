@@ -11,7 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class FitnessService {
-  public baseUrl = 'http://fitness-boys-api.herokuapp.com/';
+  public baseUrl = 'http://localhost:3000/';
   private exerciseUrl = 'exercises';
   private programsUrl = 'programs';
   private headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -19,70 +19,60 @@ export class FitnessService {
   getExercise(id: string): Observable<Exercise> {
     const url = `${this.baseUrl + this.exerciseUrl}/${id}`;
     return this.http.get<Exercise>(url)
-      .first()
-      .catch(this.handleError);
+      .first();
   }
 
-  deleteProgram(id: string): Observable<void> {
+  deleteProgram(id: string): Observable<any> {
     const url = `${this.baseUrl + this.programsUrl}/${id}`;
     return this.http.delete(url, { headers: this.headers })
-      .first()
-      .catch(this.handleError);
+      .first();
   }
 
-  deleteExercise(id: string): Observable<void> {
+  deleteExercise(id: string): Observable<any> {
     const url = `${this.baseUrl + this.exerciseUrl}/${id}`;
     return this.http.delete(url, { headers: this.headers })
-      .first()
-      .catch(this.handleError);
+      .first();
   }
 
-  getPrograms(): Observable<Program[]> {
-    return this.http.get<Program[]>(this.baseUrl + this.programsUrl)
-      .first()
-      .catch(this.handleError);
+  getPrograms(): Observable<any> {
+    return this.http.get(this.baseUrl + this.programsUrl)
+      .first();
   }
 
   getProgram(id: number): Observable<Program> {
     const url = `${this.baseUrl + this.programsUrl}/${id}`;
     return this.http.get<Program>(url)
       .first()
-      .catch(this.handleError);
   }
 
   getExercises(): Observable<Exercise[]> {
     return this.http.get<Exercise[]>(this.baseUrl + this.exerciseUrl)
-      .first()
-      .catch(this.handleError);
+      .first();
   }
 
   createExercise(exercise: Exercise): Observable<Exercise> {
     return this.http
       .post<Exercise>(this.baseUrl + this.exerciseUrl, JSON.stringify(exercise), { headers: this.headers })
-      .first()
-      .catch(this.handleError);
+      .first();
   }
 
   createProgram(program: Program): Observable<Program> {
     console.log(JSON.stringify(program));
     return this.http
       .post<Program>(this.baseUrl + this.programsUrl, JSON.stringify(program), { headers: this.headers })
-      .first()
-      .catch(this.handleError);
+      .first();
   }
 
   updateProgram(program: Program): Observable<Program> {
     return this.http
       .put<Program>(this.baseUrl + this.programsUrl + "/" + program._id.toString(), JSON.stringify(program), { headers: this.headers })
-      .first()
-      .catch(this.handleError);
+      .first();
   }
 
   updateExercise(exercise: Exercise): Observable<Exercise> {
     return this.http
       .put<Exercise>(this.baseUrl + this.exerciseUrl + "/" + exercise._id.toString(), JSON.stringify(exercise), { headers: this.headers })
-      .first()
-      .catch(this.handleError);
+      .first();
   }
 
   private handleError(error: any): Observable<any> {

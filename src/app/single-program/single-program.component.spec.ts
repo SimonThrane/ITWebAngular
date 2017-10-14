@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ShowProgramComponent } from './show-program.component';
+import { SingleProgramComponent } from './single-program.component';
 
-describe('ShowProgramComponent', () => {
-  let component: ShowProgramComponent;
-  let fixture: ComponentFixture<ShowProgramComponent>;
+describe('SingleProgramComponent', () => {
+  let component: SingleProgramComponent;
+  let fixture: ComponentFixture<SingleProgramComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ShowProgramComponent ]
+      declarations: [ SingleProgramComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ShowProgramComponent);
+    fixture = TestBed.createComponent(SingleProgramComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

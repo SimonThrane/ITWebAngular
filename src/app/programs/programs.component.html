@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row text-center">
+    <div class="col-md-12">
+      <h2>Programs</h2>
+    </div>
+  </div>
+  <hr>
+  <div class="row text-center">
+    <div class="col-md-4">
+      <h3>Name</h3>
+    </div>
+    <div class="col-md-4">
+      <h3>Category</h3>
+    </div>
+    <div class="col-md-4">
+      <h3>Date</h3>
+    </div>
+  </div>
+
+  <div class="row text-center" *ngFor="let program of programs | async">
+    <div class="col-md-4">
+      <a *ngIf="!isLoggedIn()" [routerLink]="['/programs', program._id]">{{program.name}}</a>
+      <p *ngIf="!isLoggedIn()">{{program.name}}</p>
+    </div>
+    <div class="col-md-4">
+      <p>{{program.category}}</p>
+    </div>
+    <div class="col-md-4">
+      <p>{{program.create_date | date}}</p>
+    </div>
+  </div>
+</div>

@@ -7,24 +7,22 @@ import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MainContentComponent } from './main-content/main-content.component';
-import { ProgramComponent } from './program/program.component';
-import { ExerciseComponent } from './exercise/exercise.component';
 import { FitnessService } from './fitness.service'
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { HomeComponent } from './home/home.component';
-import { ShowProgramComponent } from './show-program/show-program.component';
-import { ShowExerciseComponent } from './show-exercise/show-exercise.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { IsLoggedInGuard } from './is-logged-in.guard';
 import { AuthService } from './auth.service';
+import { ProgramsComponent } from './programs/programs.component';
+import { SingleProgramComponent } from './single-program/single-program.component';
 
 
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'programs', component: ProgramComponent, canActivate: [IsLoggedInGuard] },
-  { path: 'exercises', component: ExerciseComponent, canActivate: [IsLoggedInGuard] },
+  { path: 'programs', component: ProgramsComponent },
+  { path: 'programs/:id', component: SingleProgramComponent},
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   {
@@ -51,14 +49,12 @@ const appRoutes: Routes = [
     AppComponent,
     NavbarComponent,
     MainContentComponent,
-    ProgramComponent,
-    ExerciseComponent,
     TopBarComponent,
     HomeComponent,
-    ShowProgramComponent,
-    ShowExerciseComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    ProgramsComponent,
+    SingleProgramComponent
   ],
   providers: [
     FitnessService,
