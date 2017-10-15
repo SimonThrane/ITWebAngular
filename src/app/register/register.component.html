@@ -2,8 +2,6 @@
 <div class="row">
   <div class="col-md-6 col-sm-12">
     <p class="lead">Already a member? Please <a href="/login">log in</a> instead.</p>
-    <form ng-submit="vm.onSubmit()">
-      <div role="alert" *ngIf="" class="alert alert-danger"></div>
       <div class="form-group">
         <label for="name">Full name</label>
         <input type="text" class="form-control" id="name" placeholder="Enter your name" [(ngModel)]="user.name">
@@ -16,8 +14,7 @@
         <label for="password">Password</label>
         <input type="password" class="form-control" id="password" placeholder="Password" [(ngModel)]="user.password">
       </div>
-      <button type="submit" class="btn btn-default">Register!</button>
-    </form>
+      <button type="submit" (click)="register()" class="btn btn-default">Register!</button>
   </div>
 </div>
 </div>

@@ -23,10 +23,11 @@ export class AuthService {
       }
   }
 
-  public login(user: User): void {
-    const url = `${this.fitnessService.baseUrl}/login`;
+  public login(user: any): void {
+    const url = `${this.fitnessService.baseUrl}auth/login`;
     this.http.post<AuthResponse>(url, user).subscribe(data => {
       this.saveToken(data.token);
+      console.log(data);
     });
   };
 
@@ -35,7 +36,7 @@ export class AuthService {
   };
 
   public register(user: User): boolean {
-      const url = `${this.fitnessService.baseUrl}/register`;
+      const url = `${this.fitnessService.baseUrl}auth/register`;
       this.http.post<AuthResponse>(url, user).subscribe(data => {
       this.saveToken(data.token);
       return true;

@@ -11,36 +11,14 @@ import { AuthService } from '../auth.service';
 export class RegisterComponent implements OnInit {
 
   constructor(private fitnessService: FitnessService, private authService: AuthService) { }
-  user: User;
+  user: any;
   formError: String;
   ngOnInit() {
-    this.user = new User(null, null, null, null, null);
+    this.user = {name: null, email: null, password: null};
   }
 
-
-  onSubmit(): boolean{
-    this.formError = "";
-    if (!this.user.name || !this.user.email || !this.user.password) {
-      this.formError = "All fields required, please try again";
-      return false;
-    } else {
-      this.doRegister();
-      return true;
-    }
-  };
-
-  doRegister(): void {
-    this.formError = "";
-    this.authService
-      .register(this.user)
-      // .err(function(err){
-      //   this.formError = err;
-      // })
-      // .then(function(){
-
-      // });
-  };
-
-
+  register() {
+    this.authService.register(this.user);
+  }
 
 }
