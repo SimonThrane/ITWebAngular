@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row text-center">
+    <div class="col-md-12" *ngIf="exercises">
+      <h2>All Exercises</h2>
+    </div>
+  </div>
+  <hr>
+  <div class="row text-center">
+    <div class="col-md-2">
+      <h3>Name</h3>
+    </div>
+    <div class="col-md-2">
+      <h3>Description</h3>
+    </div>
+    <div class="col-md-2">
+        <h3>Repetition</h3>
+      </div>
+    <div class="col-md-4">
+      <h3>Time/reps</h3>
+    </div>
+  </div>
+  <div class="row text-center">
+    <div class="col-md-2">
+      <input class="form-control" type="text" [(ngModel)]="exerciseAdd.name" placeholder="name">
+    </div>
+    <div class="col-md-2">
+      <input class="form-control" type="text" [(ngModel)]="exerciseAdd.description" placeholder="description">
+    </div>
+    <div class="col-md-2">
+      <input class="form-check-input" type="checkbox" [(ngModel)]="exerciseAdd.isRepetition">
+    </div>
+    <div class="col-md-2">
+      <input class="form-control" type="text" [(ngModel)]="exerciseAdd.sets" placeholder="sets">
+    </div>
+    <div class="col-md-2" *ngIf="exerciseAdd.isRepetition">
+      <input class="form-control" type="text" [(ngModel)]="exerciseAdd.reps" placeholder="reps">
+    </div>
+    <div class="col-md-2" *ngIf="!exerciseAdd.isRepetition">
+      <input class="form-control" type="text" [(ngModel)]="exerciseAdd.time" placeholder="time">
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-primary" style="cursor: pointer;" (click)="addExercise()">
+        <i style="font-size: 20px;" class="fa fa-plus" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+  <div *ngIf="exercises">
+    <div class="row text-center" *ngFor="let exercise of exercises">
+      <div class="col-md-2">
+        <p>{{exercise.name}}</p>
+      </div>
+      <div class="col-md-2">
+        <p>{{exercise.description}}</p>
+      </div>
+      <div class="col-md-2">
+          <p>{{exercise.isRepetition}}</p>
+        </div>
+      <div *ngIf="exercise.isRepetition" class="col-md-4">
+        <p>{{exercise.sets + " x " + exercise.reps}}</p>
+      </div>
+      <div *ngIf="!exercise.isRepetition" class="col-md-4">
+        <p>{{exercise.time}}</p>
+      </div>
+      <div class="col-md-2">
+          <button class="btn btn-primary" style="cursor: pointer;" (click)="deleteExercise(exercise)">
+            <i style="font-size: 20px;" class="fa fa-trash" aria-hidden="true"></i>
+          </button>
+        </div>
+    </div>
+  </div>
+</div>

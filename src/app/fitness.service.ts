@@ -34,8 +34,8 @@ export class FitnessService {
       .first();
   }
 
-  getPrograms(): Observable<any> {
-    return this.http.get(this.baseUrl + this.programsUrl)
+  getPrograms(): Observable<Program[]> {
+    return this.http.get<Program[]>(this.baseUrl + this.programsUrl)
       .first();
   }
 
@@ -56,16 +56,15 @@ export class FitnessService {
       .first();
   }
 
-  createProgram(program: Program): Observable<Program> {
-    console.log(JSON.stringify(program));
+  createProgram(program: any): Observable<any> {
     return this.http
-      .post<Program>(this.baseUrl + this.programsUrl, JSON.stringify(program), { headers: this.headers })
+      .post<any>(this.baseUrl + this.programsUrl, JSON.stringify(program), { headers: this.headers })
       .first();
   }
 
-  updateProgram(program: Program): Observable<Program> {
+  updateProgram(program: Program): Observable<any> {
     return this.http
-      .put<Program>(this.baseUrl + this.programsUrl + "/" + program._id.toString(), JSON.stringify(program), { headers: this.headers })
+      .put(this.baseUrl + this.programsUrl + "/" + program._id.toString(), JSON.stringify(program), { headers: this.headers })
       .first();
   }
 

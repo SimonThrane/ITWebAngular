@@ -6,27 +6,49 @@
   </div>
   <hr>
   <div class="row text-center">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <h3>Name</h3>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <h3>Category</h3>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <h3>Date</h3>
     </div>
   </div>
 
-  <div class="row text-center" *ngFor="let program of programs | async">
-    <div class="col-md-4">
+  <div class="row text-center" *ngIf="!isLoggedIn()">
+    <div class="col-md-3">
+      <input class="form-control" type="text" [(ngModel)]="programAdd.name">
+    </div>
+    <div class="col-md-3">
+      <input class="form-control" type="text" [(ngModel)]="programAdd.category">
+    </div>
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-3">
+      <button class="btn btn-primary" style="cursor: pointer;" (click)="addProgram(program)">
+        <i style="font-size: 20px;" class="fa fa-plus" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="row text-center" *ngFor="let program of programs">
+    <div class="col-md-3">
       <a *ngIf="!isLoggedIn()" [routerLink]="['/programs', program._id]">{{program.name}}</a>
       <p *ngIf="!isLoggedIn()">{{program.name}}</p>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <p>{{program.category}}</p>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <p>{{program.create_date | date}}</p>
+    </div>
+    <div class="col-md-3">
+      <button class="btn btn-primary" style="cursor: pointer;" (click)="deleteProgram(program)">
+        <i style="font-size: 20px;" class="fa fa-trash" aria-hidden="true"></i>
+      </button>
     </div>
   </div>
 </div>

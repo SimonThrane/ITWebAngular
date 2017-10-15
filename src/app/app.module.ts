@@ -16,12 +16,14 @@ import { IsLoggedInGuard } from './is-logged-in.guard';
 import { AuthService } from './auth.service';
 import { ProgramsComponent } from './programs/programs.component';
 import { SingleProgramComponent } from './single-program/single-program.component';
+import { ExercisesComponent } from './exercises/exercises.component';
 
 
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'programs', component: ProgramsComponent },
+  { path: 'exercises', component: ExercisesComponent },
   { path: 'programs/:id', component: SingleProgramComponent},
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
@@ -54,7 +56,8 @@ const appRoutes: Routes = [
     RegisterComponent,
     LoginComponent,
     ProgramsComponent,
-    SingleProgramComponent
+    SingleProgramComponent,
+    ExercisesComponent
   ],
   providers: [
     FitnessService,

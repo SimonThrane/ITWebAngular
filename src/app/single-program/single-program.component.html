@@ -1,34 +1,48 @@
 <div class="container">
-    <div class="row text-center">
-      <div class="col-md-12">
-        <h2>{{(programObservable | async)?.name}}</h2>
+  <div class="row text-center">
+    <div class="col-md-12" *ngIf="program">
+      <h2>{{program.name}}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          Add exercise
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" (click)="addExerciseToProgram(exercise)" *ngFor="let exercise of exerciseObservable | async">{{exercise.name}}</a>
+        </div>
       </div>
     </div>
-    <hr>
-    <div class="row text-center">
-      <div class="col-md-4">
-        <h3>Name</h3>
-      </div>
-      <div class="col-md-4">
-        <h3>Description</h3>
-      </div>
-      <div class="col-md-4">
-        <h3>Time/reps</h3>
-      </div>
+  </div>
+  <hr>
+  <div class="row text-center">
+    <div class="col-md-4">
+      <h3>Name</h3>
     </div>
-
-    <div class="row text-center" *ngFor="let exercise of (programObservable | async)?.exercises">
-        <div class="col-md-4">
-          <p>{{exercise.name}}</p>
-        </div>
-        <div class="col-md-4">
-          <p>{{exercise.description}}</p>
-        </div>
-        <div *ngIf="exercise.isRepetition" class="col-md-4">
-          <p>{{exercise.sets + " x " + exercise.reps}}</p>
-        </div>
-        <div *ngIf="!exercise.isRepetition" class="col-md-4">
-            <p>{{exercise.time}}</p>
-          </div>
-      </div>
+    <div class="col-md-4">
+      <h3>Description</h3>
     </div>
+    <div class="col-md-4">
+      <h3>Time/reps</h3>
+    </div>
+  </div>
+  <div *ngIf="program">
+  <div class="row text-center" *ngFor="let exercise of program.exercises">
+    <div class="col-md-4">
+      <p>{{exercise.name}}</p>
+    </div>
+    <div class="col-md-4">
+      <p>{{exercise.description}}</p>
+    </div>
+    <div *ngIf="exercise.isRepetition" class="col-md-4">
+      <p>{{exercise.sets + " x " + exercise.reps}}</p>
+    </div>
+    <div *ngIf="!exercise.isRepetition" class="col-md-4">
+      <p>{{exercise.time}}</p>
+    </div>
+  </div>
+</div>
+</div>
