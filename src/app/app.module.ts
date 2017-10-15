@@ -23,8 +23,8 @@ import { ExercisesComponent } from './exercises/exercises.component';
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'programs', component: ProgramsComponent },
-  { path: 'exercises', component: ExercisesComponent },
-  { path: 'programs/:id', component: SingleProgramComponent},
+  { path: 'exercises', component: ExercisesComponent, canActivate: [IsLoggedInGuard] },
+  { path: 'programs/:id', component: SingleProgramComponent, canActivate: [IsLoggedInGuard]},
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   {

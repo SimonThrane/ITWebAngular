@@ -4,12 +4,13 @@ import { AuthResponse } from '../domain/AuthResponse';
 import { FitnessService } from './fitness.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
   private tokenName = 'fitness-boys-token';
 
-  constructor(private fitnessService: FitnessService, private http: HttpClient) { }
+  constructor(private fitnessService: FitnessService, private http: HttpClient, private router: Router) { }
 
   private saveToken(token: string) {
     window.localStorage[this.tokenName] = token;
@@ -27,18 +28,20 @@ export class AuthService {
     const url = `${this.fitnessService.baseUrl}auth/login`;
     this.http.post<AuthResponse>(url, user).subscribe(data => {
       this.saveToken(data.token);
-      console.log(data);
+      this.router.navigateByUrl('/programs');
     });
   };
 
   public logout(): void {
     window.localStorage.removeItem(this.tokenName);
+    this.router.navigateByUrl('/home');
   };
 
   public register(user: User): boolean {
       const url = `${this.fitnessService.baseUrl}auth/register`;
       this.http.post<AuthResponse>(url, user).subscribe(data => {
       this.saveToken(data.token);
+      this.router.navigateByUrl('/programs');
       return true;
     },
       // Errors will call this callback instead:
