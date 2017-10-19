@@ -5,18 +5,20 @@ import { FitnessService } from './fitness.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Activity } from '../domain/activity';
 
 @Injectable()
 export class AuthService {
   private tokenName = 'fitness-boys-token';
-
-  constructor(private fitnessService: FitnessService, private http: HttpClient, private router: Router) { }
+  public baseUrl = 'http://localhost:3000/';
+  
+  constructor(private http: HttpClient, private router: Router) { }
 
   private saveToken(token: string) {
     window.localStorage[this.tokenName] = token;
   }
 
-  private getToken(): String {
+  getToken(): String {
       if (window.localStorage[this.tokenName]) {
           return window.localStorage[this.tokenName];
       } else {
@@ -25,7 +27,7 @@ export class AuthService {
   }
 
   public login(user: any): void {
-    const url = `${this.fitnessService.baseUrl}auth/login`;
+    const url = `${this.baseUrl}auth/login`;
     this.http.post<AuthResponse>(url, user).subscribe(data => {
       this.saveToken(data.token);
       this.router.navigateByUrl('/programs');
@@ -38,7 +40,7 @@ export class AuthService {
   };
 
   public register(user: User): boolean {
-      const url = `${this.fitnessService.baseUrl}auth/register`;
+      const url = `${this.baseUrl}auth/register`;
       this.http.post<AuthResponse>(url, user).subscribe(data => {
       this.saveToken(data.token);
       this.router.navigateByUrl('/programs');
@@ -75,6 +77,7 @@ export class AuthService {
         var payload = JSON.parse(window.atob(token.split('.')[1]));
         return new User(null, null, payload.name, payload.email, null);
       }
-    };
+  };
+
 
 }

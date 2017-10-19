@@ -17,6 +17,7 @@ import { AuthService } from './auth.service';
 import { ProgramsComponent } from './programs/programs.component';
 import { SingleProgramComponent } from './single-program/single-program.component';
 import { ExercisesComponent } from './exercises/exercises.component';
+import { LogActivityComponent } from './log-activity/log-activity.component';
 
 
 
@@ -24,6 +25,7 @@ const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'programs', component: ProgramsComponent },
   { path: 'exercises', component: ExercisesComponent, canActivate: [IsLoggedInGuard] },
+  { path: 'logactivity', component: LogActivityComponent },  
   { path: 'programs/:id', component: SingleProgramComponent, canActivate: [IsLoggedInGuard]},
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
@@ -57,7 +59,8 @@ const appRoutes: Routes = [
     LoginComponent,
     ProgramsComponent,
     SingleProgramComponent,
-    ExercisesComponent
+    ExercisesComponent,
+    LogActivityComponent
   ],
   providers: [
     FitnessService,
