@@ -46,7 +46,7 @@ export class FitnessService {
 
   getProgram(id: number): Observable<Program> {
     const url = `${this.baseUrl + this.programsUrl}/${id}`;
-    return this.http.get<Program>(url)
+    return this.http.get<Program>(url, {headers: this.auhtHeader})
       .first()
   }
 
@@ -73,8 +73,9 @@ export class FitnessService {
   }
 
   updateProgram(program: Program): Observable<any> {
+    console.log(program);
     return this.http
-      .put(this.baseUrl + this.programsUrl + "/" + program._id.toString(), JSON.stringify(program), { headers: this.headers })
+      .put(this.baseUrl + this.programsUrl + "/" + program._id.toString(), JSON.stringify(program), { headers: this.auhtHeader })
       .first();
   }
 

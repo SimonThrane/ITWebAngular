@@ -21,9 +21,9 @@ export class LogActivityComponent implements OnInit, OnDestroy {
   
   ngOnInit() {
     this.programObservable = this.fitnessService.getPrograms();
-    this.activitySubscription = this.fitnessService.getActivities().subscribe(activities => {
-      this.activities = activities;
-    });
+    // this.activitySubscription = this.fitnessService.getActivities().subscribe(activities => {
+    //   this.activities = activities;
+    // });
     console.log(this.activities);
     this.activity = new Activity(null, null, new Date);
   }
